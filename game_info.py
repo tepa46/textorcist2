@@ -1,3 +1,5 @@
+import os
+
 import UserDataManager
 
 
@@ -45,7 +47,7 @@ class GameInfo:
         clear_file('inventory.txt')
 
     def read_map(self, view):
-        with open(f'data/levels/{self.level}/maps/{view}_map.txt', 'r', encoding='utf8') as f:
+        with open(os.path.join('data', 'levels', self.level, 'maps', f'{view}_map.txt'), 'r', encoding='utf8') as f:
             map_file = f.read().split('\n')
             for i in range(len(map_file)):
                 while len(map_file[i].replace('  ', ' ')) != len(map_file[i]):
@@ -53,7 +55,7 @@ class GameInfo:
             return [mini_pic for mini_pic in [pic.split(' ') for pic in map_file]]
 
     def get_player_koor(self):
-        with open(f'data/levels/{self.level}/player_koor.txt', 'r', encoding='utf8') as f:
+        with open(os.path.join('data', 'levels', self.level, 'player_koor.txt'), 'r', encoding='utf8') as f:
             koor_file = f.read().split(' ')
             return [int(pic) for pic in koor_file]
 
@@ -70,14 +72,14 @@ class GameInfo:
         return inventory
 
     def get_chest_numbers(self):
-        with open(f'data/levels/{self.level}/chest_number.txt', 'r', encoding='utf8') as input_file:
+        with open(os.path.join('data', 'levels', self.level, 'chest_number.txt'), 'r', encoding='utf8') as input_file:
             all_numbers = input_file.read().split('\n')
         if all_numbers[-1] == '':
             all_numbers = all_numbers[:-1]
         return all_numbers
 
     def get_chest_num(self, chest_num):
-        with open(f'data/levels/{self.level}/chest_number.txt', 'r', encoding='utf8') as input_file:
+        with open(os.path.join('data', 'levels', self.level, 'chest_number.txt'), 'r', encoding='utf8') as input_file:
             numbers = input_file.read().split('\n')
         return numbers[int(chest_num)]
 

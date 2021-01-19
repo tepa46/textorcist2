@@ -1,4 +1,5 @@
 import sys
+import os
 from PyQt5.QtWidgets import QInputDialog, QPushButton, QApplication, QWidget
 from PyQt5.QtGui import QImage, QPalette, QBrush
 from PyQt5.QtCore import QSize
@@ -18,7 +19,7 @@ class MainMenu(QWidget):
         self.setWindowTitle('Textorcist')
         self.setFixedSize(*SCREEN_SIZE)
 
-        oImage = QImage('data/main_menu_background')
+        oImage = QImage(os.path.join('data', 'main_menu_background'))
         sImage = oImage.scaled(QSize(*SCREEN_SIZE))
         palette = QPalette()
         palette.setBrush(QPalette.Window, QBrush(sImage))

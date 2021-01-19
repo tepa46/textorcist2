@@ -47,21 +47,22 @@ class Fight:
         self.result = ''
 
     def load_all_sprites(self, all_sprites):
-        load_sprite(all_sprites, 'fight/background', 0, 0, (660, 660))
-        load_sprite(all_sprites, f'fight/{self.hero.name}', 100, 350, (200, 200))
-        load_sprite(all_sprites, f'fight/{self.bad.name}', 400, 350, (200, 200), -1)
-        load_sprite(all_sprites, f'fight/left_hp_{self.hero.hp}', 0, 0, (250, 40))
-        load_sprite(all_sprites, f'fight/right_hp_{self.bad.hp}', 410, 0, (250, 40))
-        load_sprite(all_sprites, 'fight/right_button_0', 150, 560, (60, 60), -1)
+
+        load_sprite(all_sprites, os.path.join('fight', 'background'), 0, 0, (660, 660))
+        load_sprite(all_sprites, os.path.join('fight', self.hero.name), 100, 350, (200, 200))
+        load_sprite(all_sprites, os.path.join('fight', self.bad.name), 400, 350, (200, 200), -1)
+        load_sprite(all_sprites, os.path.join('fight', f'left_hp_{self.hero.hp}'), 0, 0, (250, 40))
+        load_sprite(all_sprites, os.path.join('fight', f'right_hp_{self.bad.hp}'), 410, 0, (250, 40))
+        load_sprite(all_sprites, os.path.join('fight', 'right_button_0'), 150, 560, (60, 60), -1)
 
     def hero_damage(self, all_sprites):
         if time.time() - self.hero.past_time < 0.7:
-            load_sprite(all_sprites, 'fight/right_button_1', 150, 560, (60, 60), -1)
-            load_sprite(all_sprites, 'fight/boom', 450, 350, (100, 100))
+            load_sprite(all_sprites, os.path.join('fight', 'right_button_1'), 150, 560, (60, 60), -1)
+            load_sprite(all_sprites, os.path.join('fight', 'boom'), 450, 350, (100, 100))
 
     def bad_damdage(self, all_sprites):
         if time.time() - self.bad.past_time < 0.7:
-            load_sprite(all_sprites, 'fight/boom', 170, 350, (100, 100))
+            load_sprite(all_sprites, os.path.join('fight', 'boom'), 170, 350, (100, 100))
 
     def render(self):
         all_sprites = pygame.sprite.Group()
@@ -112,9 +113,9 @@ class Fight:
 
         all_sprites = pygame.sprite.Group()
         if result == 'hero':
-            load_sprite(all_sprites, 'fight/win', 0, 0, (660, 660), -1)
+            load_sprite(all_sprites, os.path.join('fight', 'win'), 0, 0, (660, 660), -1)
         else:
-            load_sprite(all_sprites, 'fight/lost', 0, 0, (660, 660), -1)
+            load_sprite(all_sprites, os.path.join('fight', 'lost'), 0, 0, (660, 660), -1)
 
         all_sprites.draw(self.screen)
         pygame.display.flip()

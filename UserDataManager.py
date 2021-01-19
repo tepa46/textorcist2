@@ -1,5 +1,6 @@
 import sys
 import json
+import os
 from PyQt5.QtWidgets import QPushButton, QApplication, QMainWindow, QLineEdit, QWidget
 from PyQt5.QtGui import QImage, QPalette, QBrush
 from PyQt5.QtCore import QSize
@@ -10,29 +11,29 @@ SCREEN_SIZE = [660, 660]
 
 def get_user_data():
     try:
-        open('data/users.json', 'r', encoding='utf8')
+        open(os.path.join('data', 'users.json'), 'r', encoding='utf8')
     except FileNotFoundError:
-        with open('data/users.json', 'w', encoding='utf8') as f:
+        with open(os.path.join('data', 'users.json'), 'w', encoding='utf8') as f:
             print('{}', file=f)
 
-    with open('data/users.json', 'r', encoding='utf8') as input_file:
+    with open(os.path.join('data', 'users.json'), 'r', encoding='utf8') as input_file:
         d = json.load(input_file)
     return d
 
 
 def get_user_levels():
-    with open('data/unlock_levels.json', 'r', encoding='utf8') as input_file:
+    with open(os.path.join('data', 'unlock_levels.json'), 'r', encoding='utf8') as input_file:
         d = json.load(input_file)
     return d
 
 
 def put_user_data(users_list):
-    with open('data/users.json', 'w', encoding='utf8') as output_file:
+    with open(os.path.join('data', 'users.json'), 'w', encoding='utf8') as output_file:
         json.dump(users_list, output_file)
 
 
 def put_user_levels(users_levels):
-    with open('data/unlock_levels.json', 'w', encoding='utf8') as output_file:
+    with open(os.path.join('data', 'unlock_levels.json'), 'w', encoding='utf8') as output_file:
         json.dump(users_levels, output_file)
 
 
@@ -45,7 +46,7 @@ class UserDataManager(QMainWindow):
         self.setWindowTitle('Textorcist')
         self.setFixedSize(*SCREEN_SIZE)
 
-        oImage = QImage('data/main_menu_background')
+        oImage = QImage(os.path.join('data', 'main_menu_background'))
         sImage = oImage.scaled(QSize(*SCREEN_SIZE))
         palette = QPalette()
         palette.setBrush(QPalette.Window, QBrush(sImage))
@@ -83,7 +84,7 @@ class Login(QWidget):
         self.setWindowTitle('Textorcist')
         self.setFixedSize(*SCREEN_SIZE)
 
-        oImage = QImage('data/main_menu_background')
+        oImage = QImage(os.path.join('data', 'main_menu_background'))
         sImage = oImage.scaled(QSize(*SCREEN_SIZE))
         palette = QPalette()
         palette.setBrush(QPalette.Window, QBrush(sImage))
@@ -141,7 +142,7 @@ class Register(QWidget):
         self.setWindowTitle('Textorcist')
         self.setFixedSize(*SCREEN_SIZE)
 
-        oImage = QImage('data/main_menu_background')
+        oImage = QImage(os.path.join('data', 'main_menu_background'))
         sImage = oImage.scaled(QSize(*SCREEN_SIZE))
         palette = QPalette()
         palette.setBrush(QPalette.Window, QBrush(sImage))
